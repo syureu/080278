@@ -1,31 +1,42 @@
-<!-- 4.6. Promise와 {#await ...} 블록 사용하기 -->
+<!-- 4.7. fetch 결과를 {#await ...} 블록으로 표시하기 -->
 
 <script>
     // async 함수 정의
-    async function promiseFunc(){
-        const result = new Promise((resolve, reject) => {
-            // 비동기 함수 setTimeout 실행 부분
-            setTimeout(()=>{
-                resolve("Hello Universe~!"); // 1초 후 실행
-                //reject(new Error("reject입니다")); // reject 테스트
-            },1000);
-        });
-        const rtn = await result; // resolve 호출 때 까지 기다림
-        return rtn;
+    async function getPosts(){
+        // 원격지 데이터를 fetch로 가져오기
+        const res = await fetch("https://jsonplaceholder.typicode.com/posts"); 
+        const json = await res.json(); // fetch 결과를 JSON 객체로 변환
+        return json;                   // JSON 객체 반환
     }
-	    let myPromise = promiseFunc(); // 1. 최초 호출하기 
+    let promisePosts = getPosts();     // 최초 호출
 </script>
-
-<!-- 2. 버튼 만들어 호출하기 -->
-<button on:click={() => myPromise = promiseFunc() }> async 함수 호출하기 </button>
-
 <main>
-    <!-- 3. 비동기 함수 결과로 바꾸기 -->
-    {#await myPromise}
-        <h1>잠시만 기다리세요.. </h1>
-    {:then res}
-        <h1>{res}</h1>
-    {:catch error}
-        <h1>Error: {error.message}</h1>
-    {/await}
+    <!-- 버튼 클릭 시 getPosts 함수를 호출하여 원격지 데이터 가져오기 -->
+    <button on:click={() => promisePosts = getPosts()}> 포스트 리스트 가져오기 </button>
+    <table border="1">
+        <thead>
+            <th>id</th>
+            <th>사용자</th>
+            <th>타이틀</th>    
+            <th>내용</th>
+        </thead>
+        <tbody>
+        {#await promisePosts} <!-- 동작 중일 때 처리 -->
+            <tr>
+                <td colspan=4>
+                가져오는 중 잠시만 기다리세요
+                </td>
+            </tr>  
+        {:then posts} <!-- 정상 종료 후 처리 -->
+            {#each posts as post} <!-- fetch 결과의 데이터 개수만큼 반복 실행 -->
+                <tr> <!-- tr, td 엘리먼트로 출력 -->
+                    <td>{post.id}</td>
+                    <td>{post.userId}</td>
+                    <td>{post.title}</td>
+                    <td>{post.body}</td>
+                </tr>
+            {/each}
+        {/await}        
+        </tbody>
+    </table>
 </main>
