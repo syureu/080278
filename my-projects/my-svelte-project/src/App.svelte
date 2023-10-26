@@ -1,18 +1,31 @@
-<!-- 4.5. {#each}로 JSON 객체 다루기, 다차원 배열 표시하기 - 다차원 배열 표시하기 -->
+<!-- 4.6. Promise와 {#await ...} 블록 사용하기 -->
 
 <script>
-    // 배열을 요소로 갖는 2차원 배열 선언
-    let emailCard = [
-        ["_id", "a1"] ,
-        ["name", "둘리"] ,
-        ["email", "d2@mail.com"] ,
-        ["age", 10]
-    ];
+    // async 함수 정의
+    async function promiseFunc(){
+        const result = new Promise((resolve, reject) => {
+            // 비동기 함수 setTimeout 실행 부분
+            setTimeout(()=>{
+                //resolve("Hello Universe~!"); // 1초 후 실행
+                reject(new Error("reject입니다")); // reject 테스트
+            },1000);
+        });
+        const rtn = await result; // resolve 호출 때 까지 기다림
+        return rtn;
+    }
+	    let myPromise = promiseFunc(); // 1. 최초 호출하기 
 </script>
 
+<!-- 2. 버튼 만들어 호출하기 -->
+<button on:click={() => myPromise = promiseFunc() }> async 함수 호출하기 </button>
+
 <main>
-    <!-- 2차원 배열의 요소(하위 배열) 개수만큼 실행 -->
-    {#each emailCard as [key, value], idx}     <!-- 하위 배열 각 요소의 이름을 지어줌 -->
-        <p>{idx}번째 키: {key}의 값은 {value}</p> <!-- 요소의 이름을 사용하여 출력 -->
-    {/each}
+    <!-- 3. 비동기 함수 결과로 바꾸기 -->
+    {#await myPromise}
+        <h1>잠시만 기다리세요.. </h1>
+    {:then res}
+        <h1>{res}</h1>
+    {:catch error}
+        <h1>Error: {error.message}</h1>
+    {/await}
 </main>
