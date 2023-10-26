@@ -1,14 +1,10 @@
-<!-- 4.10.  {@html}로 돔에 HTML 엘리먼트 생성하기 -->
+<!-- 4.8. {#key 표현식} HTML {/key} -->
 
 <script>
-    //게시글 형태의 JSON 정의
-    var post = {
-        title: "가장 빨리 만나는 스벨트",
-        content: "<span style='color:red'>스벨트</span>는 정말 <b>재미있어요</b>"
-    }
+    let name = 'world'; 
 </script>
 
-<div>
-    <h1>{post.title}</h1> <!-- 일반 출력 -->
-    {post.content}  <!-- {@html} 표현식 사용하여 출력 -->
-</div>
+<input type=text bind:value={name}> <!-- 1. name을 변경하기 위한 코드 -->
+
+<p>{Date()}</p> <!-- 2. 비교용 시각 -->
+{@debug name}
