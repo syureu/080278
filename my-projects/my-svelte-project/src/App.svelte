@@ -1,16 +1,18 @@
-<!-- 4.5. {#each}로 JSON 객체 다루기, 다차원 배열 표시하기 - Object.entries와 each를 사용해 JSON 내용 표시하기 -->
+<!-- 4.5. {#each}로 JSON 객체 다루기, 다차원 배열 표시하기 - 다차원 배열 표시하기 -->
 
 <script>
-    // JSON 객체 선언
-    let emailCard = { _id: "a1", name: "둘리", email: "d2@mail.com", age: 10};
-
-    // 콘솔에서 Object.entries 호출 결과 보기
-    console.log(Object.entries(emailCard)); 
+    // 배열을 요소로 갖는 2차원 배열 선언
+    let emailCard = [
+        ["_id", "a1"] ,
+        ["name", "둘리"] ,
+        ["email", "d2@mail.com"] ,
+        ["age", 10]
+    ];
 </script>
 
 <main>
-    <!-- Object.entries의 반환값(배열)으로 반복 실행 -->
-    {#each Object.entries(emailCard) as [key, value], idx}
-        <p>{idx}번째 키: {key}의 값은 {value}</p> <!-- 키와 값 출력 -->
+    <!-- 2차원 배열의 요소(하위 배열) 개수만큼 실행 -->
+    {#each emailCard as [key, value], idx}     <!-- 하위 배열 각 요소의 이름을 지어줌 -->
+        <p>{idx}번째 키: {key}의 값은 {value}</p> <!-- 요소의 이름을 사용하여 출력 -->
     {/each}
 </main>
