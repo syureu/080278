@@ -6,8 +6,8 @@
         const result = new Promise((resolve, reject) => {
             // 비동기 함수 setTimeout 실행 부분
             setTimeout(()=>{
-                //resolve("Hello Universe~!"); // 1초 후 실행
-                reject(new Error("reject입니다")); // reject 테스트
+                resolve("Hello Universe~!"); // 1초 후 실행
+                //reject(new Error("reject입니다")); // reject 테스트
             },1000);
         });
         const rtn = await result; // resolve 호출 때 까지 기다림
