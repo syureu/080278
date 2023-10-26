@@ -10,5 +10,5 @@
 
 <div>
     <h1>{post.title}</h1> <!-- 일반 출력 -->
-    {@html post.content}  <!-- {@html} 표현식 사용하여 출력 -->
+    {post.content}  <!-- {@html} 표현식 사용하여 출력 -->
 </div>
