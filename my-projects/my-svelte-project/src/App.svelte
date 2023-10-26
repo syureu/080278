@@ -1,14 +1,16 @@
-<!-- 4.4. {#each} 루프 안에서 인덱스 사용하기 - each를 활용한 select box 예 -->
+<!-- 4.5. {#each}로 JSON 객체 다루기, 다차원 배열 표시하기 - Object.entries와 each를 사용해 JSON 내용 표시하기 -->
 
 <script>
-    let colors = ["빨강", "노랑", "파랑", "보라"]; // 반복 출력할 배열
+    // JSON 객체 선언
+    let emailCard = { _id: "a1", name: "둘리", email: "d2@mail.com", age: 10};
+
+    // 콘솔에서 Object.entries 호출 결과 보기
+    console.log(Object.entries(emailCard)); 
 </script>
 
 <main>
-    <ul>
-        <!-- 배열의 요소 개수만큼 반복 실행 -->
-        {#each colors as color, idx}  <!-- 반복 횟수 변수 idx 선언 -->
-            <li>{idx}: {color}</li>   <!-- 배열의 요소를 li로 출력 -->
-        {/each}
-    </ul>
+    <!-- Object.entries의 반환값(배열)으로 반복 실행 -->
+    {#each Object.entries(emailCard) as [key, value], idx}
+        <p>{idx}번째 키: {key}의 값은 {value}</p> <!-- 키와 값 출력 -->
+    {/each}
 </main>
