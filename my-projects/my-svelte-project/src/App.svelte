@@ -1,10 +1,11 @@
-<!-- 4.8. {#key 표현식} HTML {/key} -->
-
 <script>
-    let name = 'world'; 
+    export let name = "world";
+
+    console.log(name); // 1. 일반 디버깅 코드
+
+    $:console.log(name); // 2. 리액티브 디버깅 코드
 </script>
 
-<input type=text bind:value={name}> <!-- 1. name을 변경하기 위한 코드 -->
-
-<p>{Date()}</p> <!-- 2. 비교용 시각 -->
-{@debug name}
+<input type=text bind:value={name}>
+<!-- {@debug name} --> <!-- name 값 확인 -->
+<h1>Hello {name}!</h1>
