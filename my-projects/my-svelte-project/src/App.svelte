@@ -1,18 +1,14 @@
-<!-- 5.6. 배열의 변화 감지하기 -->
+<!-- 5.7. JSON 객체의 변화 감지하기 1 -->
 
 <script>
-    // 배열 선언 후 할당
-    let colors = ["빨강", "주황", "노랑", "초록"];
-  
-    // 센서의 감지와 그에 따라 동작(Reactive Statements)할 코드
-    $: console.log("log.1: ", colors);
-
-    function assignment() {
-        colors.pop(); //배열의 색상을 한개 지움
-        colors = colors; // 할당 트리거로 감지 코드가 동작 예상됨
-        console.log("log.2: ", colors); //지워진 상태를 콘솔에 출력
-    }
+    // 원본 JSON 객체 정의
+    let man = {
+          age: "10",
+          name: { first: "승현", last: "박" }
+    };
+    let name = man.name; // name으로 man.name 복사
+    man.name.last = "park";  // 원본 JSON 객체의 last 값을 "박"에서 "park"으로 변경
 </script>
   
-<p>{colors.join(", ")} 모두 {colors.length} 개의 색이 있습니다.</p>
-<button on:click={assignment}>할당</button>
+<p>man.name.last: {man.name.last}</p> <!-- 원본 JSON 객체 man 으로 접근한 last의 값 출력 -->
+<p>name.last: {name.last}</p>         <!-- 참조 변수 name 으로 접근한 last의 값 출력-->
