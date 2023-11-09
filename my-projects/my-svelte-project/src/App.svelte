@@ -11,7 +11,7 @@
     function assignment() {
         man.name.last = "park";  // 원본 JSON 객체의 last 값을 "박"에서 "park"으로 변경
         console.log(name.last);  // 복사본의 값이 변경되었는지 확인
-        //name = name;             // 할당 트리거로 감지 코드 동작
+        name = name;             // 할당 트리거로 감지 코드 동작
     }
 </script>
   
