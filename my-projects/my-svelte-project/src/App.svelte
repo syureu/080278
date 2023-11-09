@@ -9,7 +9,7 @@
 
     function assignment() {
         colors.pop(); //배열의 색상을 한개 지움
-        //colors = colors; // 할당 트리거로 감지 코드가 동작 예상됨
+        colors = colors; // 할당 트리거로 감지 코드가 동작 예상됨
         console.log("log.2: ", colors); //지워진 상태를 콘솔에 출력
     }
 </script>
