@@ -1,11 +1,8 @@
+<!-- 5.3. 센서 생성과 동작 정의 -->
+
 <script>
-    export let name = "world";
-
-    console.log(name); // 1. 일반 디버깅 코드
-
-    $:console.log(name); // 2. 리액티브 디버깅 코드
+    // 반응형 변수 선언 후 값 할당
+    let count = 10;
+    // count 값의 변화 감지와 그에 따른 동작 코드, '이 아니라 `(백틱)를 사용하는 데 주의
+    $: console.log(`count는 ${count}입니다`);
 </script>
-
-<input type=text bind:value={name}>
-<!-- {@debug name} --> <!-- name 값 확인 -->
-<h1>Hello {name}!</h1>
