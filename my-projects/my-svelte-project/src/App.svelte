@@ -1,12 +1,17 @@
-<!-- 6.1. 텍스트 / 텍스트 입력 값 바인딩하기 -->
+<!-- 6.2. input에 숫자 값 바인딩하기 -->
 
 <script>
     let name = "world";
+    let size = 30; // 크기 바인딩 변수
 </script>
 
 <main>
-    <!-- 스크립트 변수 name을 HTML input 값으로 바인딩 -->
-    <input type="text" bind:value="{name}"> 
-    <!-- 스크립트 변수 name을 HTML h1의 텍스트로 바인딩 -->
-    <h1>Hello {name}!</h1> 
+    <!-- range의 값을 size 변수와 양방향 바인딩 -->
+    <input type="range" bind:value={size} min=0 max=100><br/>
+
+    <!-- numer의 값을 size 변수와 양방향 바인딩 -->
+    <input type="number" bind:value={size} min=0 max=100><br/>
+
+    <!--h1의 폰트 크기를 size 변수와 양방향 바인딩 -->
+    <h1 style="font-size:{size}px;"> Hello {name}! </h1> 
 </main>
