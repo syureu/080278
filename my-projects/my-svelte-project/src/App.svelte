@@ -1,17 +1,16 @@
-<!-- 6.2. input에 숫자 값 바인딩하기 -->
+<!-- 6.3. 체크 박스 바인딩하기 -->
 
 <script>
-    let name = "world";
-    let size = 30; // 크기 바인딩 변수
+    let editable = false; // 보기/수정 모드 바인딩 변수
+    let favorite = "스벨트";
 </script>
 
 <main>
-    <!-- range의 값을 size 변수와 양방향 바인딩 -->
-    <input type="range" bind:value={size} min=0 max=100><br/>
-
-    <!-- numer의 값을 size 변수와 양방향 바인딩 -->
-    <input type="number" bind:value={size} min=0 max=100><br/>
-
-    <!--h1의 폰트 크기를 size 변수와 양방향 바인딩 -->
-    <h1 style="font-size:{size}px;"> Hello {name}! </h1> 
+    <input type=checkbox bind:checked={editable}> 수정하려면 체크하세요
+    <!-- editable 변수와 바인딩 -->
+    {#if editable} <!-- true일 때 동작 -->
+        <p> 수정 모드: <input bind:value={favorite}> </p>
+    {:else}        <!-- false일 때 동작 -->
+        <p> 보기 모드: {favorite} </p>
+    {/if}   
 </main>
