@@ -6,7 +6,7 @@
 
 <main>
     <!-- 스크립트 변수 name을 HTML input 값으로 바인딩 -->
-    <input type="text" value="{name}"> 
+    <input type="text" bind:value="{name}"> 
     <!-- 스크립트 변수 name을 HTML h1의 텍스트로 바인딩 -->
     <h1>Hello {name}!</h1> 
 </main>
