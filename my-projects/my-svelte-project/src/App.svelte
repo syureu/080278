@@ -1,27 +1,26 @@
-<!-- 6.4. 다중 객체(radio, check)에 그룹 바인딩하기 -->
+<!-- 6.5. textarea 바인딩하기 -->
 
 <script>
-    let where = ""; // radio 그룹 바인딩 변수 
-    let menu = ["커피", "주스", "샌드위치", "김밥"]; // 매뉴를 담은 배열
-    let chosen = []; // checkbox 그룹 바인딩 변수	
-    let order = ""; // 주문 내용을 저장할 변수
-    $:order = chosen.length>0  
-              ? `<b>${chosen}</b> 메뉴를 <b>${where=="매장"?"매장 식사를":"포장 주문을"}</b> 선택하셨습니다` 
-              : "메뉴를 선택해주세요";	
-</script>
- 
-<main>  
-    <h2> 포장: {where}</h2>
-    <input type="radio" bind:group={where} value="포장"> 포장합니다
-    <input type="radio" bind:group={where} value="매장"> 매장에서 먹을래요
-
-    <h2> 메뉴: {chosen}</h2>  
-    {#each menu as item} <!-- 매뉴의 개수만큼 checkbox 생성 -->
-        <label>
-            <!-- chosen과 바인딩, 매뉴를 값으로 가짐  -->
-            <input type="checkbox" bind:group={chosen} value={item}> {item} 
-        </label>
-    {/each}
-
-    <p>{@html order}</p>
-</main>
+    import {marked} from "marked"; // 마크다운 임포트
+    let markdown = "# 타이틀 \n\n- 리스트1\n- 리스트2\n- 리스트3"; // 변수 선언
+  </script>
+  
+  <!-- 마크다운 텍스트에어리어 선언하기 -->
+  <textarea bind:value={markdown} placeholder="내용 입력"/>
+  <!-- 마크다운을 HTML로 변환하고 돔에 디스플레이 하기 -->
+  <div class="preview">{@html marked(markdown)}</div>
+  
+  <style>
+      textarea {
+          height: 40%;
+          width: 100%;
+          margin: 0;
+          border: none;
+      }
+      .preview {
+          height: 60%;
+          padding: 20px;
+          border-top: solid 2px gray;
+      }
+  </style>
+  
