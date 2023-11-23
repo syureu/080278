@@ -27,6 +27,39 @@
     </tbody>
 </table>
 
+<br/>
+<!-- 인라인 에디팅 가능한 표 만들기 -->
+<table>
+    <thead>
+        <th>탈퇴여부</th><th>이메일</th><th>메일 타입</th><th>이름</th><th>나이</th><th>등급</th>
+    </thead>
+    <tbody>
+    {#each customers as cust}
+        <tr>
+            <!-- 탈퇴여부는 체크 박스로 바인딩 -->
+            <td><input type="checkbox" bind:checked={cust.disable}></td>
+            <!-- 이메일은 input 박스에 text 바인딩 -->
+            <td><input type="text" bind:value={cust.email} disabled={cust.disable}></td>
+                  <!-- 메일 타입은 라디오 그룹 바인딩 -->
+            <td>[ 집: <input type="radio" bind:group={cust.mailType} 
+                             value="home" disabled={cust.disable}> | 
+                 회사: <input type="radio" bind:group={cust.mailType}
+                             value="office" disabled={cust.disable}> ]</td>
+                   <!-- 이름은 input 박스에 text 바인딩 -->
+            <td><input type="text" bind:value={cust.name} disabled={cust.disable}></td>
+                   <!-- 나이는 input 박스에 숫자 바인딩 -->
+            <td><input type="number" bind:value={cust.age} disabled={cust.disable}></td>
+                   <!-- 등급은 단일 select 바인딩 -->
+            <td><select bind:value={cust.grade}>
+                <option value="gold">골드</option>
+                <option value="silver">실버</option>
+                <option value="normal">일반</option>
+            </select></td>
+        </tr>
+    {/each}        
+    </tbody>
+</table>
+
 <style>
   table {
     width: 100%;               /* 가로 사이즈 */
