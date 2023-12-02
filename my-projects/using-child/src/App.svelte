@@ -12,6 +12,17 @@
 		{ code: "green", desc: "초록" },
 		{ code: "orange", desc: "주황" },
 	];
+
+	// spread
+	let param = {
+		choice: "yellow",
+		list: [
+			{ code: "red", desc: "빨강" },
+			{ code: "yellow", desc: "노랑" },
+			{ code: "green", desc: "초록" },
+			{ code: "orange", desc: "주황" },
+		],
+	};
 </script>
 
 <!-- HTML 블록 -->
