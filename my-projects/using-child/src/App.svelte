@@ -37,6 +37,7 @@
 			개발자 C: <CustomSelect list={colorList} bind:choice={color} /> - {color}
 			선택됨
 		</li>
+		<li>spread: <CustomSelect {...param} /> - {param.choice} 선택됨</li>
 	</ul>
 </main>
 
