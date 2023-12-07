@@ -1,7 +1,8 @@
-<!-- 6.11. this 바인딩 -->
+<!-- 6.12.  하위 컴포넌트 데이터 바인딩 1/2 - App.svelte -->
 
 <script>
     import { onMount } from "svelte";
+    import List from "./List.svelte"; // List 컴포넌트 임포트
     onMount(async () => {
         todoInput.focus();
     });
@@ -36,12 +37,7 @@
 <!-- add 함수와 연결된 추가 버튼 -->
 <button on:click={add}>추가</button>
 
-<ul>
-    <!-- 할 일 리스트 -->
-    {#each todos as item}
-        <li>{item}</li>
-    {/each}
-</ul>
+<List list_todos={todos} />
 
 <!-- remove 함수와 바인딩 된 전부 삭제 버튼 -->
 <button on:click={remove}>전부 삭제</button>
