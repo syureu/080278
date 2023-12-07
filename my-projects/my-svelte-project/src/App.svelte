@@ -1,26 +1,47 @@
-<!-- 6.10.  크기 값 바인딩 -->
+<!-- 6.11. this 바인딩 -->
 
 <script>
-    let w = 500; // clientWidth 초깃값
-    let h = 500; // clientHeight 초깃값
-    let text = "크기 값 바인딩 예제";
-    let size = 15; // 텍스트 사이즈 추가
+    import { onMount } from "svelte";
+    onMount(async () => {
+        todoInput.focus();
+    });
+
+    /* 1. 변수 선언하기 */
+    let todos = []; // 할 일을 저장하는 배열
+    let todoInput; // this 바인딩용 변수
+    let todo = ""; // 텍스트 바인딩용 변수
+
+    /* 3. 함수 구현 */
+    const add = () => {
+        /* 할 일 추가 함수 */
+        if (todo.replaceAll(" ", "") == "") {
+            alert("값을 입력하세요");
+            todoInput.focus();
+        } else {
+            todos.push(todo);
+            todos = todos;
+            todo = "";
+            todoInput.focus();
+        }
+    };
+    const remove = () => {
+        /* 전부 삭제 함수 */
+        todos = [];
+        todoInput.focus();
+    };
 </script>
 
-<p>{w}px x {h}px</p>
-<!-- w, h 값 확인 -->
+<!-- 2. HTML 블록 작성 -->
+<input type="text" bind:this={todoInput} bind:value={todo} />
+<!-- add 함수와 연결된 추가 버튼 -->
+<button on:click={add}>추가</button>
 
-<input type="range" bind:value={size} />
-<!-- 사이즈값 변경할 range 컨트롤 -->
+<ul>
+    <!-- 할 일 리스트 -->
+    {#each todos as item}
+        <li>{item}</li>
+    {/each}
+</ul>
 
-<!-- w, h와 바인딩 -->
-<div bind:clientWidth={w} bind:clientHeight={h}>
-    <span style="font-size: {size}px">{text}</span>
-    <!-- 사이즈 바인딩 -->
-</div>
-
-<style>
-    div {
-        border: solid gray 1px;
-    }
-</style>
+<!-- remove 함수와 바인딩 된 전부 삭제 버튼 -->
+<button on:click={remove}>전부 삭제</button>
