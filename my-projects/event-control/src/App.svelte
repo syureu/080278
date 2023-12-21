@@ -21,3 +21,13 @@
 <button on:click={search}>
 	Search ({count}) <!-- 클릭 횟수를 버튼에 표시 -->
 </button>
+
+<!-- 인라인으로 이벤트 처리하기  -->
+<button
+	on:click={(event) => {
+		console.log(event.target);
+		count = count + 1;
+	}}
+>
+	Search Inline ({count})
+</button>
