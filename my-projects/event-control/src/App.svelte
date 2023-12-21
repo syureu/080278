@@ -1,39 +1,19 @@
 <script>
-	// 클릭 횟수 저장 변수
-	let count = 0;
-	// 버튼 이벤트 처리 함수
-	const search = (event) => {
-		console.log(event.target); // 이벤트 대상을 출력
-		count = count + 1;
-	};
+	// SearchButton 컴포넌트 임포트
+	import SearchButton from "./SearchButton.svelte";
 
-	/* 삭제합니다 
-     // 버튼 이벤트 처리 함수 한 개 더!
-     const increase = () => {
-        console.log("increase: 조회 버튼 클릭~!");
-        count = count + 1;
-    }
-    */
+	let searchText = ""; // 하위 컴포넌트 데이터를 저장하고 출력할 변수 선언
+	const customSearch = (event) => {
+		searchText = event.detail.text; // 하위 컴포넌트 데이터를 꺼내서 searchText로 저장
+	};
 </script>
 
-<!-- <button on:click={search} on:click={increase}> -->
-<!-- 삭제합니다 -->
-<button on:click={search}>
-	Search ({count}) <!-- 클릭 횟수를 버튼에 표시 -->
-</button>
-
-<!-- 인라인으로 이벤트 처리하기  -->
-<button
-	on:click={(event) => {
-		console.log(event.target);
-		count = count + 1;
-	}}
->
-	Search Inline ({count})
-</button>
-
-<!-- 이벤트 제한자 사용하기  -->
-<button on:click|once={search}>
-	<!-- 한 번만 호출되는 once -->
-	Search Once ({count})
-</button>
+<!-- 하위 컴포넌트의 커스텀 이벤트 다루기 -->
+<p>
+	<!-- 커스텀 이벤트 searchClicked의 이벤트 처리를 customSearch 함수로 연결 -->
+	<SearchButton on:searchClicked={customSearch} />
+	<!-- 하위 컴포넌트에서 받은 데이터를 출력 -->
+	<br />{searchText == ""
+		? "검색어를 입력 후 Search 버튼을 클릭하세요"
+		: "검색어: " + searchText}
+</p>
