@@ -31,3 +31,9 @@
 >
 	Search Inline ({count})
 </button>
+
+<!-- 이벤트 제한자 사용하기  -->
+<button on:click|once={search}>
+	<!-- 한 번만 호출되는 once -->
+	Search Once ({count})
+</button>
