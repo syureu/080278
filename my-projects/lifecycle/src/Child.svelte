@@ -1,11 +1,15 @@
 <script>
-    document.getElementById("text01").focus();
+    // 테스트용 input 박스에 포커스 주기
+    // document.getElementById("text01").focus();
+
+    let txt; // input 박스 위치 저장용 전역 변수 생성
 
     import { onMount, beforeUpdate, afterUpdate, onDestroy } from "svelte";
 
     // onMount 예제 코드
     onMount(() => {
-        //      document.getElementById("text01").focus();
+        txt = document.getElementById("text01");
+        txt.focus();
         console.log("Child onMount 호출됨");
     });
     onDestroy(() => {
