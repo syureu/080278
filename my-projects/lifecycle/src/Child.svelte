@@ -11,3 +11,7 @@
         console.log("Child onDestroy 호출됨");
     });
 </script>
+
+<h1>Child</h1>
+<input type="text" id="text01" />
+<!-- 테스트용 input 박스 -->
