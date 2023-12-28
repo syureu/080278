@@ -1,5 +1,6 @@
 <script>
-    //document.getElementById("text01").focus();
+    document.getElementById("text01").focus();
+
     import { onMount, beforeUpdate, afterUpdate, onDestroy } from "svelte";
 
     // onMount 예제 코드
