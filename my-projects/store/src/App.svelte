@@ -1,30 +1,16 @@
 <script>
-	export let name;
+	let rangeValue = 50; // 레인지 초기값
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<section>
+		<h2>count는 {rangeValue}입니다.</h2>
+		<input
+			type="range"
+			bind:value={rangeValue}
+			step="1"
+			min="1"
+			max="100"
+		/>
+	</section>
 </main>
-
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
