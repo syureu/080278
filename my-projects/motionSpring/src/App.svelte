@@ -1,52 +1,36 @@
 <script>
-	// tweened 사용 선언
-	import { tweened } from "svelte/motion";
-	// easing 효과 중 cubicIn 사용 선언
-	import { cubicIn } from "svelte/easing";
-	// tweened를 통하여 progress 스토어 생성, duration 옵션 사용
-	const progress = tweened(0, {
-		duration: 1000,
-	});
-
-	// cubicIn 옵션 설정을 추가하여 스토어 생성
-	const progress2 = tweened(0, {
-		duration: 1000,
-		easing: cubicIn, // cubicIn 옵션 설정
-	});
-
-	// 스토어의 값이 변하는 추이를 보기 위해 로그 출력
-	progress.subscribe((v) => console.log(v));
+	import { spring } from "svelte/motion";
+	// 원(circle)의  위치 좌표에 바인딩할 스토어
+	let coords = spring(
+		{ x: 50, y: 50 },
+		{
+			stiffness: 0.1, // (따라오는 속도): 느림 0 <-> 1 빠름
+			damping: 0.5, // (멀어지는 거리): 넓음 0 <-> 1 좁음
+			precision: 0.3, // (튕겨지는 횟수): 많음 0 <-> 1 적음
+		},
+	);
+	// 원의 r(지름)값과 바인딩할 스토어 생성
+	let size = spring(10);
+	// coords.subscribe(v=>console.log(v.x, v.y));
 </script>
 
-// 270p
-
-<progress value={$progress}></progress>
-<!-- 프로그레스 바 -->
-<progress value={$progress2}></progress><!-- cubicIn 예제 프로그레스바 -->
-<button
-	on:click={() => {
-		// 0으로 움직이게 하는 버튼
-		$progress = 0;
-		$progress2 = 0; // cubicIn 설정된 스토어 값 변경
-	}}>0%</button
+<!-- 마우스 움직임 : 좌표 , 업, 다운 이벤트 발생 시 -->
+<svg
+	on:mousemove={(e) => coords.set({ x: e.clientX, y: e.clientY })}
+	on:mousedown={() => size.set(30)}
+	on:mouseup={() => size.set(10)}
 >
-<button
-	on:click={() => {
-		// 0.5로 움직이게 하는 버튼
-		progress.set(0.5);
-		progress2.set(0.5); // cubicIn 설정된 스토어 값 변경
-	}}>50%</button
->
-<button
-	on:click={() => {
-		// 1로 움직이게 하는 버튼
-		progress.set(1);
-		progress2.set(1); // cubicIn 설정된 스토어 값 변경
-	}}>100%</button
->
+	<!-- 원의 좌표와 크기를 coords와 size로 바인딩 -->
+	<circle cx={$coords.x} cy={$coords.y} r={$size} />
+</svg>
 
 <style>
-	progress {
+	svg {
 		width: 100%;
-	}
+		height: 100%;
+		margin: -8px;
+	} /* 원이 올라갈 svg 스타일 */
+	circle {
+		fill: #080808;
+	} /* 원의 색상 */
 </style>
