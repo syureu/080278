@@ -1,30 +1,20 @@
+<!-- 14.  애니메이션 -->
+
 <script>
-	export let name;
+	import { flip } from "svelte/animate"; // flip 사용 선언
+	let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]; // 카드 번호 배열
+	// 섞기 버튼 이벤트 처리 함수
+	function shuffle() {
+		// 카드 번호 배열을 섞음
+		numbers = numbers.sort(() => 0.5 - Math.random());
+	}
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
+<button on:click={shuffle}> 섞기 </button>
+<!-- 클릭 시 카드를 섞음 -->
+<div>
+	<!-- 버튼에 flip 효과를 적용 -->
+	{#each numbers as number (number)}
+		<button animate:flip>{number}</button>
+	{/each}
+</div>
